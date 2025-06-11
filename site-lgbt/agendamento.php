@@ -7,7 +7,7 @@ $inscricoes = file_exists($arquivo) ? json_decode(file_get_contents($arquivo), t
 <head>
   <meta charset="UTF-8">
   <title>Agendamentos - PAS</title>
-  <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/agendamento.css">
 </head>
 <body>
   <main>
