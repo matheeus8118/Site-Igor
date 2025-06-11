@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Eventos - PAS</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main>
+    <h2>Eventos Disponíveis</h2>
+    <form action="api/inscrever.php" method="post">
+      <div class="item-evento">
+        <input type="radio" name="evento" id="evento1" value="Oficina de Direitos LGBTQIAP+">
+        <label for="evento1"><strong>Oficina de Direitos LGBTQIAP+</strong> - 10/06/2025</label>
+      </div>
+      <div class="item-evento">
+        <input type="radio" name="evento" id="evento2" value="Palestra: Inclusão nas Empresas">
+        <label for="evento2"><strong>Palestra: Inclusão nas Empresas</strong> - 22/06/2025</label>
+      </div>
+      <div class="item-evento">
+        <input type="radio" name="evento" id="evento3" value="Roda de Conversa - Apoio Psicológico">
+        <label for="evento3"><strong>Roda de Conversa - Apoio Psicológico</strong> - 28/06/2025</label>
+      </div>
+      <button type="submit">Inscrever-se</button>
+    </form>
+  </main>
+</body>
+</html>
