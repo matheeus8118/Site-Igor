@@ -58,4 +58,3 @@ $inscricoes = file_exists($arquivo) ? json_decode(file_get_contents($arquivo), t
   </main>
 </body>
 </html>
-php -S localhost:8000
