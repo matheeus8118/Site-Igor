@@ -1,22 +1,183 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Cadastro - PAS</title>
- <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('fundocadastro.png'); /* Caminho da imagem */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .cad {
+            background-color: rgba(137, 88, 227, 0.9); /* cor roxa com 90% opacidade */
+            padding: 30px;
+            margin: 50px auto;
+            width: 850px;
+            border-radius: 10px;
+            color: rgb(227, 206, 20);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input {
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            width: 100%;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        button {
+            margin-top: 25px;
+            font-size: 20px;
+            background-color: rgb(147, 34, 203);
+            color: gold;
+            cursor: pointer;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            align-self: center;
+            width: 200px;
+        }
+
+        button:hover {
+            background-color: rgb(201, 45, 158);
+            transition: background-color 0.3s ease;
+        }
+
+        #erro-senha {
+            display: none;
+            text-align: center;
+            color: red;
+            font-weight: bold;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .cad {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <main>
-    <h2>Cadastro de Usuário</h2>
-    <form>
-      <label for="nome">Nome:</label><br>
-      <input type="text" id="nome" placeholder="Nome completo"><br>
-      <label for="email">Email:</label><br>
-      <input type="email" id="email" placeholder="exemplo@email.com"><br>
-      <label for="senha">Senha:</label><br>
-      <input type="password" id="senha" placeholder="******"><br>
-      <button type="submit">Cadastrar</button>
-    </form>
-  </main>
+    <div class="cad">
+        <h1>Cadastro de Usuário</h1>
+
+        <!-- Mensagem de erro -->
+        <div id="erro-senha">⚠️ As senhas não coincidem!</div>
+
+        <form method="POST" action="recebedados.php">
+            <div class="form-group">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" maxlength="100" required autocomplete="name">
+            </div>
+
+            <div class="form-group">
+                <label for="idade">Idade:</label>
+                <input type="number" id="idade" name="idade" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" name="cpf"
+                       maxlength="14"
+                       pattern="^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$"
+                       required
+                       title="Digite o CPF no formato 999.999.999-99"
+                       autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="nomesocial">Nome Social:</label>
+                <input type="text" id="nomesocial" name="nomesocial" maxlength="100" autocomplete="name">
+            </div>
+
+            <div class="form-group">
+                <label for="genero">Identidade de Gênero:</label>
+                <input type="text" id="genero" name="genero" maxlength="50" required>
+            </div>
+
+            <div class="form-group">
+                <label for="orientacao">Orientação Sexual:</label>
+                <input type="text" id="orientacao" name="orientacao" maxlength="50" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" maxlength="100" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" minlength="6" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmar">Confirmar Senha:</label>
+                <input type="password" id="confirmar" name="confirmar" minlength="6" required>
+            </div>
+
+            <button type="submit" aria-label="Enviar dados do formulário">Enviar Dados</button>
+        </form>
+    </div>
+
+    <!-- Script para aplicar máscara no campo CPF -->
+    <script>
+        const cpfInput = document.getElementById('cpf');
+        cpfInput.addEventListener('input', () => {
+            let cpf = cpfInput.value.replace(/\D/g, '');
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            cpfInput.value = cpf;
+        });
+    </script>
+
+    <!-- Script para validar senhas -->
+    <script>
+        const form = document.querySelector("form");
+        form.addEventListener("submit", function (e) {
+            const senha = document.getElementById("senha").value;
+            const confirmar = document.getElementById("confirmar").value;
+            const erro = document.getElementById("erro-senha");
+
+            if (senha !== confirmar) {
+                e.preventDefault(); // impede envio
+                erro.style.display = "block"; // mostra mensagem
+            } else {
+                erro.style.display = "none"; // oculta se estiver visível
+            }
+        });
+    </script>
 </body>
 </html>
