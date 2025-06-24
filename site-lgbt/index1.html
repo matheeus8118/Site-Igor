@@ -37,7 +37,14 @@
       text-decoration: underline;
     }
 
-    .btn-cadastro {
+    .botoes {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-cadastro,
+    .btn-doacao {
       background-color: yellow;
       color: black;
       padding: 10px 15px;
@@ -92,13 +99,16 @@
   <header>
     <nav>
       <a href="index.html">Início</a>
-      <a href="quemsomos.html">Quem somos</a>
-      <a href="oque.html">O que fazemos</a>
+      <a href="QUEMSOMOS.html">Quem somos</a>
+      <a href="OQUEFAZEMOS.html">O que fazemos</a>
       <a href="blog.html">Blog e Notícias</a>
       <a href="loja.html">Loja Virtual</a>
       <a href="login.php">Área de Login</a>
     </nav>
-    <a href="cadastro.html" class="btn-cadastro">Cadastre-se</a>
+    <div class="botoes">
+      <a href="cadastro.html" class="btn-cadastro">Cadastre-se</a>
+      <a href="doacao.html" class="btn-doacao">Doação</a>
+    </div>
   </header>
 
   <div class="banner">
