@@ -1,39 +1,53 @@
 <?php
 session_start();
 
+// Proteção contra campos vazios
+$cpf   = $_POST['cpf'] ?? '';
+$senha = $_POST['senha'] ?? '';
+if (empty($cpf) || empty($senha)) {
+    header("Location: login.php?erro=1");
+    exit;
+}
+
+// Conexão com o banco
 $conexao = new mysqli("localhost", "root", "", "teste");
 if ($conexao->connect_error) {
     die("Erro na conexão: " . $conexao->connect_error);
 }
 
-$cpf = $_POST['cpf'];
-$senha = $_POST['senha'];
-
-// Remove pontos e traço do CPF
+// Remove caracteres do CPF
 $cpf_limpo = preg_replace('/[^0-9]/', '', $cpf);
 
-// Busca o registro completo
-$stmt = $conexao->prepare("SELECT cpf, senha FROM dados WHERE REPLACE(REPLACE(REPLACE(cpf, '.', ''), '-', ''), ' ', '') = ?");
+// Consulta SQL (agora inclui nome_social)
+$stmt = $conexao->prepare("
+    SELECT cpf, nome, nomesocial, email, senha, foto 
+    FROM dados 
+    WHERE REPLACE(REPLACE(REPLACE(cpf, '.', ''), '-', ''), ' ', '') = ?
+");
 $stmt->bind_param("s", $cpf_limpo);
 $stmt->execute();
-$stmt->store_result();
+$result = $stmt->get_result();
 
-if ($stmt->num_rows > 0) {
-    $stmt->bind_result($cpf_bd, $senhaHash);
-    $stmt->fetch();
+// Verificação
+if ($result->num_rows > 0) {
+    $usuario = $result->fetch_assoc();
 
-    if (password_verify($senha, $senhaHash)) {
-        $_SESSION['cpf'] = $cpf_bd;
-        header("Location: painel.php");
-        exit;
-    } else {
-        header("Location: login.php?erro=1");
+    if (password_verify($senha, $usuario['senha'])) {
+        $_SESSION['usuario'] = [
+            'cpf'         => $usuario['cpf'],
+            'nome'        => $usuario['nome'],
+            'nomesocial' =>  $usuario['nomesocial'] ?? '',
+            'email'       => $usuario['email'],
+            'foto'        => (!empty($usuario['foto']) && file_exists($usuario['foto'])) 
+                                ? $usuario['foto'] 
+                                : 'fotopadrao.png'
+        ];
+        header("Location: index.php");
         exit;
     }
-} else {
-    header("Location: login.php?erro=1");
-    exit;
 }
 
-$stmt->close();
-$conexao->close();
+header("Location: login.php?erro=1");
+exit;
+?>
+
