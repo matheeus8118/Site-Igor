@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Loja Virtual</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ee0979, #ff6a00);
+      color: white;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-voltar {
+      background-color: yellow;
+      color: black;
+      padding: 8px 15px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-voltar:hover {
+      background-color: #ffe600;
+      cursor: pointer;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding: 40px;
+    }
+
+    .produto {
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      width: 250px;
+    }
+
+    .produto img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .produto h3 {
+      margin: 10px 0 5px;
+    }
+
+    .produto p {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .aviso {
+      font-size: 13px;
+      color: yellow;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="QUEMSOMOS.html">Quem somos</a>
+    <a href="OQUEFAZEMOS.html">O que fazemos</a>
+    <a href="blog.html">Blog e Notícias</a>
+    <a href="loja.html">Loja Virtual</a>
+  </nav>
+  <a href="index.html" class="btn-voltar">← Início</a>
+</header>
+
+<div class="container">
+  <div class="produto">
+    <img src="camisa.png" alt="Camisa com temática LGBT+">
+    <h3>Camisa Orgulho</h3>
+    <p>R$ 59,90</p>
+    <p>Camisa colorida com estampa LGBTQIA+.</p>
+    <p class="aviso">Para comprar, faça <a href="login.php">login</a> ou <a href="cadastro.html">cadastre-se</a>.</p>
+  </div>
+
+  <div class="produto">
+    <img src="caneca.png" alt="Caneca temática LGBT+">
+    <h3>Caneca Arco-Íris</h3>
+    <p>R$ 39,90</p>
+    <p>Caneca personalizada com as cores do orgulho.</p>
+    <p class="aviso">Para comprar, faça <a href="login.php">login</a> ou <a href="cadastro.html">cadastre-se</a>.</p>
+  </div>
+</div>
+
+<footer>&copy; 2025 Comunidade LGBT+ | Desenvolvido por Estudantes da Unijorge</footer>
+
+</body>
+</html>
