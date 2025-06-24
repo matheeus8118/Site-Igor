@@ -97,16 +97,18 @@
 
       <?php
         if (isset($_GET['erro'])) {
-           echo '<div class="mensagem erro">❌ CPF ou senha inválidos.</div>';
+          echo '<div class="mensagem erro">❌ CPF ou senha inválidos.</div>';
         }
         if (isset($_GET['ok'])) {
-           echo '<div class="mensagem sucesso">✅ Login realizado com sucesso!</div>';
+          echo '<div class="mensagem sucesso">✅ Login realizado com sucesso!</div>';
         }
         if (isset($_GET['cadastro']) && $_GET['cadastro'] === 'ok') {
-           echo '<div class="mensagem sucesso">✅ Cadastro realizado com sucesso! Faça login abaixo.</div>';
+          echo '<div class="mensagem sucesso">✅ Cadastro realizado com sucesso! Faça login abaixo.</div>';
+        }
+        if (isset($_GET['senhaAtualizada'])) {
+          echo '<div class="mensagem sucesso">✅ Senha atualizada com sucesso! Faça login abaixo.</div>';
         }
       ?>
-
     </form>
   </div>
 
@@ -123,3 +125,4 @@
   </script>
 </body>
 </html>
+
